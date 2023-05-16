@@ -31,10 +31,12 @@ const EditFederation = () => {
   };
 
   const dispatch = useDispatch();
-  const [courseName, setCourseName] = useState("");
-  const [courseLength, setCourseLength] = useState("");
-  const [courseInstructor, setCourseInstructor] = useState("");
-  const [courseDescription, setCourseDescription] = useState("");
+  const [courseName, setCourseName] = useState(course.title);
+  const [courseprice, setCourseprice] = useState(course.price);
+  const [courseInstructor, setCourseInstructor] = useState(course.instructor);
+  const [courseDescription, setCourseDescription] = useState(
+    course.description
+  );
   const [modules, setModules] = useState([]);
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState("");
@@ -48,7 +50,7 @@ const EditFederation = () => {
         title: courseName,
         instructor: courseInstructor,
         image: "https://img-a.udemycdn.com/course/240x135/1286908_1773_6.jpg",
-        price: 10.99,
+        price: courseprice,
         url: "https://www.udemy.com/course/react-2nd-edition/",
         description: courseDescription,
       })
@@ -59,7 +61,7 @@ const EditFederation = () => {
       url: "35.222.255.39:8080/api/v1/courses",
       data: JSON.stringify({
         title: "biology",
-        length: "4 month",
+        price: "4 month",
         instructor: "Taru",
         modules: ["modules"],
       }),
@@ -99,14 +101,14 @@ const EditFederation = () => {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="courseLength">Course length</Label>
+                <Label for="courseprice">Course price</Label>
                 <Input
-                  onChange={(e) => setCourseLength(e.target.value)}
-                  id="courseLength"
-                  name="courseLength"
-                  placeholder="The length of the course"
+                  onChange={(e) => setCourseprice(e.target.value)}
+                  id="courseprice"
+                  name="courseprice"
+                  placeholder="The price of the course"
                   type="text"
-                  defaultValue={course.length}
+                  defaultValue={course.price}
                 />
               </FormGroup>
               <FormGroup>
