@@ -14,8 +14,11 @@ import {
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { addCourse } from "../features/courses/courseSlice";
+import { useDispatch } from "react-redux";
 
 const RegisterCourse = () => {
+  const dispatch = useDispatch();
   const [courseName, setCourseName] = useState("");
   const [courseLength, setCourseLength] = useState("");
   const [courseInstructor, setCourseInstructor] = useState("");
@@ -27,6 +30,17 @@ const RegisterCourse = () => {
   const handleRegisterCourse = () => {
     setLoading(true);
     setModules([courseDescription]);
+    dispatch(
+      addCourse({
+        id: 40,
+        title: courseName,
+        instructor: courseInstructor,
+        image: "https://img-a.udemycdn.com/course/240x135/1286908_1773_6.jpg",
+        price: 10.99,
+        url: "https://www.udemy.com/course/react-2nd-edition/",
+        description: courseDescription,
+      })
+    );
     axios({
       method: "post",
       url: "35.222.255.39:8080/api/v1/courses",

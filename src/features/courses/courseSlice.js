@@ -83,8 +83,30 @@ export const coursesSlice = createSlice({
       alert("Course deleted successfully");
       window.location.reload();
     },
+    addCourse: (state, action) => {
+      const newCourse = action.payload;
+      state.courses.push(newCourse);
+      alert("Course added successfully");
+      window.location.href = "/";
+    },
+    editCourse: (state, action) => {
+      const editedCourse = action.payload;
+      console.log(editedCourse, "edited course");
+      var newArray = [];
+      state.courses.map((item) => {
+        if (item.id !== editedCourse.id) {
+          newArray.push(item);
+        } else {
+          newArray.push(editedCourse);
+        }
+      });
+      state.courses = newArray;
+      console.log(state.courses, "new array");
+      alert("Course edited successfully");
+      window.location.href = "/";
+    },
   },
 });
 
-export const { deleteCourse } = coursesSlice.actions;
+export const { deleteCourse, addCourse, editCourse } = coursesSlice.actions;
 export default coursesSlice.reducer;
